@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+Absolutely! Here's a README draft based on the provided information:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
-## Available Scripts
+# Quest Marker Management System
 
-In the project directory, you can run:
+This project implements a map-based system to manage quests and markers, allowing users to interact with various functionalities:
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Buttons
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Create New Quest Button:** Initiates the creation of a new quest, enabling users to add markers to this quest.
 
-### `npm test`
+- **Go to Previous Quest Button:** Navigates to the previous quest, displaying markers or locations associated with the preceding quest.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Go to Next Quest Button:** Shifts to the next quest, displaying markers or locations relevant to the subsequent quest.
 
-### `npm run build`
+- **Delete All Quest Button:** Clears the map of all quests and their markers, removing all quests and associated points of interest.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Interactions
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Right-click to Delete Marker:** Users can delete markers by right-clicking on them. This action removes a specific marker from the current quest.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Drag and Drop for All Markers:** Enables users to drag and drop markers across the map for all quests, allowing the repositioning of markers regardless of the active quest.
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+To utilize this system:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Click the appropriate buttons to navigate between quests or create new quests.
+2. Interact with markers: right-click to delete or drag and drop them to new positions.
+3. Utilize the provided functionalities to manage quests and markers effectively.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Feel free to explore and interact with the system to manage quests and markers seamlessly!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
