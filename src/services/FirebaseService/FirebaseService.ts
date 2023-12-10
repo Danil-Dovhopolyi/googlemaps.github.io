@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, DataSnapshot } from "firebase/database";
+import { getDatabase, ref, get, DataSnapshot, remove } from "firebase/database";
 import { handleMarkerDragEnd } from "../../utils/markerUtils/handleMarkerDragEnd";
 import { firebaseConfig } from "../../config/IfirebaseConfig";
 
@@ -10,7 +10,11 @@ export const loadMarkersFromFirebase = (
   currentQuest: number,
   map: google.maps.Map | null,
   setMarkers: Function,
+  markers: { [key: string]: google.maps.Marker },
 ) => {
+  Object.values(markers).forEach((marker) => {
+    marker.setMap(null);
+  });
   const markersRef = ref(database, `Quests/Quest${currentQuest}`);
   get(markersRef)
     .then((snapshot: DataSnapshot) => {
@@ -30,47 +34,38 @@ export const loadMarkersFromFirebase = (
             draggable: true,
           });
 
-          marker.addListener("dragend", (event: any) => {
-            createDragEndHandler(
-              key,
-              event,
-              newMarkers,
-              setMarkers,
-              currentQuest,
-              database,
-            );
-          });
-
           newMarkers[key] = marker;
         });
+
+        // Set markers retrieved from Firebase
         setMarkers(newMarkers);
+
+        // Attach dragend listeners for all markers
+        attachDragEndListeners(newMarkers, setMarkers, currentQuest);
       }
     })
     .catch((error) => {
       console.error("Error fetching markers:", error);
     });
+};
 
-  const createDragEndHandler = (
-    markerKey: string,
-    event: any,
-    markers: { [key: string]: google.maps.Marker },
-    setMarkers: Function,
-    currentQuest: number,
-    database: any,
-  ) => {
-    const draggedMarker = event?.target;
-    if (draggedMarker) {
-      const position = draggedMarker.getPosition();
-      if (position) {
-        handleMarkerDragEnd(
-          markerKey,
-          position,
-          markers,
-          setMarkers,
-          currentQuest,
-          database,
-        );
-      }
-    }
-  };
+const attachDragEndListeners = (
+  markers: { [key: string]: google.maps.Marker },
+  setMarkers: Function,
+  currentQuest: number,
+) => {
+  Object.keys(markers).forEach((key) => {
+    const marker = markers[key];
+
+    marker.addListener("dragend", (event: any) => {
+      handleMarkerDragEnd(
+        key,
+        event,
+        markers,
+        setMarkers,
+        currentQuest,
+        database,
+      );
+    });
+  });
 };

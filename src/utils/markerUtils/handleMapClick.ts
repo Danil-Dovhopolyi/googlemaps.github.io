@@ -1,6 +1,6 @@
-import checkMarkerInPreviousQuests from "../../services/markerService/checkMarkerInPreviousQuests";
 import createNewMarker from "../../services/markerService/createNewMaker";
 import { CustomMarker } from "../../types/CustomMarker";
+import { fetchMarkerCountForCurrentQuest } from "./fetchMarkerCountFromQuest";
 const handleMapClick = async (
   event: google.maps.MapMouseEvent,
   map: google.maps.Map | null,
@@ -13,20 +13,15 @@ const handleMapClick = async (
     const newPosition = event.latLng;
     if (!newPosition) return;
 
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numerical = Object.keys(markers).length + 1;
-    const key = `${alphabet[numerical - 1]}${numerical}`;
+    try {
+      const markerCount = await fetchMarkerCountForCurrentQuest(
+        currentQuest,
+        database,
+      );
 
-    const markerFound = await checkMarkerInPreviousQuests(
-      currentQuest,
-      key,
-      newPosition,
-      database,
-    );
+      const key = `Marker_${markerCount + 1}_Quest${currentQuest}`;
 
-    if (!markerFound) {
-      // Create a new marker and associate it with the current quest
-      await createNewMarker(
+      createNewMarker(
         key,
         newPosition,
         map,
@@ -35,6 +30,8 @@ const handleMapClick = async (
         database,
         markers,
       );
+    } catch (error) {
+      console.error("Error handling map click:", error);
     }
   }
 };

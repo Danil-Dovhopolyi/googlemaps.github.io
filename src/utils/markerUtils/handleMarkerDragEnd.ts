@@ -11,7 +11,8 @@ export const handleMarkerDragEnd = (
   const updatedMarkers = { ...markers };
   updatedMarkers[markerKey].setPosition(position);
   setMarkers(updatedMarkers);
-
+  const lat = position.lat();
+  const lng = position.lng();
   let markerUpdated = false;
 
   for (let i = 1; i < currentQuest; i++) {
@@ -26,8 +27,8 @@ export const handleMarkerDragEnd = (
             `Quests/Quest${i}/${markerKey}/Location`,
           );
           set(updatedQuestMarkerRef, {
-            lat: position.lat(),
-            lng: position.lng(),
+            lat: lat,
+            lng: lng,
           });
         }
       })
