@@ -1,5 +1,3 @@
-Absolutely! Here's a README draft based on the provided information:
-
 ---
 
 # Quest Marker Management System
