@@ -10,7 +10,7 @@ This project implements a map-based system to manage quests and markers, allowin
 
 - **Create New Quest Button:** Initiates the creation of a new quest, enabling users to add markers to this quest.
 
-- **Go to Previous Quest Button:** Navigates to the previous quest, displaying markers or locations associated with the preceding quest.
+- **Go to Previous Quest Button:** Navigate to the previous quest, displaying markers or locations associated with the preceding quest.
 
 - **Go to Next Quest Button:** Shifts to the next quest, displaying markers or locations relevant to the subsequent quest.
 
